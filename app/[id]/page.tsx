@@ -1,8 +1,6 @@
 import React from "react";
 import { getData } from "../page";
 
-import "./facture.css";
-
 import FacturePrint from "@/components/shared/FacturePrint";
 import { InvoiceType } from "@/types";
 

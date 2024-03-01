@@ -9,21 +9,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import { useDebounce } from "use-debounce";
 import { InvoiceType } from "@/types";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 const TableInv = ({ data }: { data: InvoiceType[] }) => {
   const [query, setQuery] = useState("");
+  const Router = useRouter();
+
+  const [value] = useDebounce(query, 1000);
 
   const filteredData = data.filter((inv) =>
     inv.InvoiceItems.find((item) => {
-      if (item.ItemLibelle.toLowerCase().includes(query.toLowerCase()))
+      if (item.ItemLibelle.toLowerCase().includes(value.toLowerCase()))
         return inv;
     })
   );
-
   return (
     <>
       <div>
@@ -42,8 +45,8 @@ const TableInv = ({ data }: { data: InvoiceType[] }) => {
         <TableHeader>
           <TableRow className="font-extrabold bg-slate-200">
             <TableHead className="w-[100px]">Facture ID</TableHead>
-            <TableHead className="text-center">Facture Date</TableHead>
-            <TableHead className="text-center"> Client Nom</TableHead>
+            <TableHead className="text-left">Facture Date</TableHead>
+            <TableHead className="text-left"> Client Nom</TableHead>
             <TableHead className="text-right"> Fournisseur Nom</TableHead>
             <TableHead className="text-right"> Montant TTC</TableHead>
           </TableRow>
@@ -58,52 +61,20 @@ const TableInv = ({ data }: { data: InvoiceType[] }) => {
             );
 
             return (
-              <TableRow key={invioce.InvoiceID}>
+              <TableRow
+                onClick={() => Router.push(`/${invioce.InvoiceID}`)}
+                key={invioce.InvoiceID}
+                className="cursor-pointer"
+              >
                 <TableCell className="font-medium">
-                  <Link
-                    href={`/${invioce.InvoiceID}`}
-                    className="w-full"
-                    key={invioce.InvoiceID}
-                  >
-                    {invioce?.InvoiceID}
-                  </Link>
+                  {invioce?.InvoiceID}
                 </TableCell>
-                <TableCell>
-                  <Link
-                    href={`/${invioce.InvoiceID}`}
-                    className="w-full"
-                    key={invioce.InvoiceID}
-                  >
-                    {invioce?.InvoiceDate}
-                  </Link>
-                </TableCell>
-                <TableCell>
-                  <Link
-                    href={`/${invioce.InvoiceID}`}
-                    className="w-full"
-                    key={invioce.InvoiceID}
-                  >
-                    {invioce?.ClientName}
-                  </Link>
-                </TableCell>
+                <TableCell>{invioce?.InvoiceDate}</TableCell>
+                <TableCell>{invioce?.ClientName}</TableCell>
                 <TableCell className="text-right">
-                  <Link
-                    href={`/${invioce.InvoiceID}`}
-                    className="w-full"
-                    key={invioce.InvoiceID}
-                  >
-                    {invioce?.SupplierName}
-                  </Link>
+                  {invioce?.SupplierName}
                 </TableCell>
-                <TableCell className="text-right">
-                  <Link
-                    href={`/${invioce.InvoiceID}`}
-                    className="w-full"
-                    key={invioce.InvoiceID}
-                  >
-                    {MontantTTC}
-                  </Link>
-                </TableCell>
+                <TableCell className="text-right">{MontantTTC}</TableCell>
               </TableRow>
             );
           })}

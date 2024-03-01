@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { Sun } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 

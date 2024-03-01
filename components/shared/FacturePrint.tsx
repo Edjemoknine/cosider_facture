@@ -55,40 +55,46 @@ const FacturePrint = ({ invoiceDetail }: { invoiceDetail: InvoiceType }) => {
           </div>
         </div>
 
-        <table border={4} className="w-full mb-10 ">
-          <tr className="text-left">
-            <th>N°</th>
-            <th>LIBELLE</th>
-            <th>Unit</th>
-            <th>QUANTITÉ</th>
-            <th>PRIX</th>
-            <th>HT</th>
-            <th>TTC</th>
+        <table border={4} className="w-full mb-10 p-2 border-2 border-gray-950">
+          <tr className="text-left bg-orange-400">
+            <th className="border-2 border-gray-950 p-2">N°</th>
+            <th className="border-2 border-gray-950 p-2">LIBELLE</th>
+            <th className="border-2 border-gray-950 p-2">Unit</th>
+            <th className="border-2 border-gray-950 p-2">QUANTITÉ</th>
+            <th className="border-2 border-gray-950 p-2">PRIX</th>
+            <th className="border-2 border-gray-950 p-2">HT</th>
+            <th className="border-2 border-gray-950 p-2">TTC</th>
           </tr>
           {invoiceDetail.InvoiceItems.map((inv) => (
             <tr key={inv.ItemID}>
-              <td>{inv.ItemID}</td>
-              <td>{inv.ItemLibelle}</td>
-              <td>{inv.ItemUnit}</td>
-              <td>{inv.ItemQuantity}</td>
-              <td>{inv.ItemPrice}</td>
-              <td>{inv.ItemTax}</td>
-              <td>{inv.ItemQuantity * inv.ItemPrice + inv.ItemTax}</td>
+              <td className="border-2 border-gray-950 p-2">{inv.ItemID}</td>
+              <td className="border-2 border-gray-950 p-2">
+                {inv.ItemLibelle}
+              </td>
+              <td className="border-2 border-gray-950 p-2">{inv.ItemUnit}</td>
+              <td className="border-2 border-gray-950 p-2">
+                {inv.ItemQuantity}
+              </td>
+              <td className="border-2 border-gray-950 p-2">{inv.ItemPrice}</td>
+              <td className="border-2 border-gray-950 p-2">{inv.ItemTax}</td>
+              <td className="border-2 border-gray-950 p-2">
+                {inv.ItemQuantity * inv.ItemPrice + inv.ItemTax}
+              </td>
             </tr>
           ))}
         </table>
         <div className="border-2 w-1/2 ml-auto border-[#323232]">
-          <div className="flex border-b divide-gray-600 border-[#323232] divide-x-2 p-2">
-            <span className="flex-1 font-bold">TOTAL</span>
-            <span className="flex-1 pl-2">{total}</span>
+          <div className="flex border-b divide-gray-600 border-[#323232] divide-x-2 ">
+            <span className="flex-1 p-2">TOTAL</span>
+            <span className="flex-1 p-2">{total}</span>
           </div>
-          <div className="flex border-b divide-gray-600 border-[#323232] divide-x-2 p-2">
-            <span className="flex-1 font-bold">TVA</span>
-            <span className="flex-1 pl-2">{Tva}</span>
+          <div className="flex border-b divide-gray-600 border-[#323232] divide-x-2 ">
+            <span className="flex-1 p-2">TVA</span>
+            <span className="flex-1 p-2">{Tva}</span>
           </div>
-          <div className="flex divide-gray-600 border-[#323232] divide-x-2 p-2">
-            <span className="flex-1 font-bold">Total TTC</span>
-            <span className="flex-1 pl-2">{total + Tva}</span>
+          <div className="flex divide-gray-600 border-[#323232] divide-x-2 ">
+            <span className="flex-1 font-extrabold italic p-2">Total TTC</span>
+            <span className="flex-1 p-2 font-extrabold">{total + Tva}.00</span>
           </div>
         </div>
 
