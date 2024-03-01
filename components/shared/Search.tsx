@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import Link from "next/link";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -13,9 +14,11 @@ const Search = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search by Item Name"
-        className="text-slate-200"
+        className="text-slate-600"
       />
-      <Button>Search</Button>
+      <Button asChild>
+        <Link href={`?query=${query}`}>Search</Link>
+      </Button>
     </div>
   );
 };
