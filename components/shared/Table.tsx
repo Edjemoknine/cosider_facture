@@ -29,7 +29,7 @@ const TableInv = ({ data }: { data: InvoiceType[] }) => {
       <div>
         <h1 className="text-center my-6 text-3xl font-bold">Invoices Table</h1>
       </div>
-      <div className="flex gap-3 my-10">
+      <div className="flex gap-3 my-10 max-w-4xl mx-auto">
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -40,7 +40,7 @@ const TableInv = ({ data }: { data: InvoiceType[] }) => {
       <Table className="">
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
-          <TableRow className="font-extrabold ">
+          <TableRow className="font-extrabold bg-slate-200">
             <TableHead className="w-[100px]">Facture ID</TableHead>
             <TableHead className="text-center">Facture Date</TableHead>
             <TableHead className="text-center"> Client Nom</TableHead>
@@ -48,7 +48,7 @@ const TableInv = ({ data }: { data: InvoiceType[] }) => {
             <TableHead className="text-right"> Montant TTC</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="">
+        <TableBody className="w-full">
           {filteredData?.map((invioce: InvoiceType) => {
             const MontantTTC = invioce?.InvoiceItems?.reduce(
               (acc, invioce) =>
@@ -60,27 +60,47 @@ const TableInv = ({ data }: { data: InvoiceType[] }) => {
             return (
               <TableRow key={invioce.InvoiceID}>
                 <TableCell className="font-medium">
-                  <Link href={`/${invioce.InvoiceID}`} key={invioce.InvoiceID}>
+                  <Link
+                    href={`/${invioce.InvoiceID}`}
+                    className="w-full"
+                    key={invioce.InvoiceID}
+                  >
                     {invioce?.InvoiceID}
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link href={`/${invioce.InvoiceID}`} key={invioce.InvoiceID}>
+                  <Link
+                    href={`/${invioce.InvoiceID}`}
+                    className="w-full"
+                    key={invioce.InvoiceID}
+                  >
                     {invioce?.InvoiceDate}
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link href={`/${invioce.InvoiceID}`} key={invioce.InvoiceID}>
+                  <Link
+                    href={`/${invioce.InvoiceID}`}
+                    className="w-full"
+                    key={invioce.InvoiceID}
+                  >
                     {invioce?.ClientName}
                   </Link>
                 </TableCell>
                 <TableCell className="text-right">
-                  <Link href={`/${invioce.InvoiceID}`} key={invioce.InvoiceID}>
+                  <Link
+                    href={`/${invioce.InvoiceID}`}
+                    className="w-full"
+                    key={invioce.InvoiceID}
+                  >
                     {invioce?.SupplierName}
                   </Link>
                 </TableCell>
                 <TableCell className="text-right">
-                  <Link href={`/${invioce.InvoiceID}`} key={invioce.InvoiceID}>
+                  <Link
+                    href={`/${invioce.InvoiceID}`}
+                    className="w-full"
+                    key={invioce.InvoiceID}
+                  >
                     {MontantTTC}
                   </Link>
                 </TableCell>
